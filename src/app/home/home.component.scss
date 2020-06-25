@@ -1,0 +1,21 @@
+.container {
+  width: 55%;
+  margin: auto;
+
+  @media screen and (min-width: 900px) {
+    mat-tab-group {
+      .mat-tab-body-content {
+        padding: 20px !important;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+
+    h2 {
+      text-align: center;
+    }
+  }
+}

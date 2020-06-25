@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <span class="banner">
+    <mat-icon>shopping_cart</mat-icon>
+    Shopping Tracking List
+  </span>
+
+  <span class="spacer"></span>
+
+  <ng-content></ng-content>
+
+  <!-- Mobile navbar hamburger button -->
+  <div class="mobile-menu-button" fxHide fxShow.xs (click)="toggleNavbar()" [class.crossed]="navbarStatus">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</mat-toolbar>
+
+<mobile-navbar></mobile-navbar>

@@ -1,0 +1,73 @@
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" fxHide.xs>
+  <ng-container matColumnDef="index">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="store">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Store</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.store }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.price | currency: userCurrency }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="arrival_date">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{ isPurchasedPage ? 'ETA' : 'Received' }}</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.arrivalDate | date: 'dd/MM/yyyy' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action" *ngIf="isPurchasedPage">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-flat-button color="primary" (click)="markAsReceived(element)">
+        <mat-icon>done</mat-icon>
+        Received
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="desktopColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: desktopColumns"></mat-row>
+</mat-table>
+
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" fxHide fxShow.xs>
+  <ng-container matColumnDef="index">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="item">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Item</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div>
+        <p>{{ element.name }}</p>
+        <p>{{ element.store }}</p>
+        <p>{{ element.price | currency: userCurrency }}</p>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="markAsReceived(element)">
+        <mat-icon>done</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="mobileColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: mobileColumns"></mat-row>
+</mat-table>
+
+<button mat-fab color="accent" (click)="openNewItemDialog()" *ngIf="isPurchasedPage">
+  <mat-icon>add</mat-icon>
+</button>

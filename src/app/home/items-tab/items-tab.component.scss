@@ -1,0 +1,38 @@
+mat-table {
+  width: 100%;
+
+  @media screen and (max-width: 599px) {
+    mat-cell,
+    mat-header-cell,
+    mat-footer-cell {
+      flex: auto !important;
+
+      button {
+        background: #673ab7;
+        color: white;
+      }
+    }
+
+    p {
+      margin: 7px;
+      color: gray;
+
+      &:first-child {
+        font-weight: bold;
+        color: black;
+      }
+    }
+  }
+
+  mat-cell {
+    button {
+      margin: 15px 0;
+    }
+  }
+}
+
+button[mat-fab] {
+  // margin: 5px 0;
+  float: right;
+  margin: 30px 20px;
+}

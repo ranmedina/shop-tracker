@@ -1,0 +1,13 @@
+<button mat-button [matMenuTriggerFor]="currencyMenu" fxHide.xs>{{ userCurrency }}</button>
+<button mat-flat-button [matMenuTriggerFor]="currencyMenu" fxHide fxShow.xs>{{ userCurrency }}</button>
+<mat-menu #currencyMenu="matMenu">
+  <mat-radio-group (change)="onCurrencyChanged($event)">
+    <mat-radio-button
+      *ngFor="let curr of objectKeys(Currency)"
+      [value]="curr"
+      [checked]="userCurrency === curr"
+      (click)="$event.stopPropagation()"
+      >{{ curr }} {{ curr === Currency.ILS ? '&#8362;' : '&#36;' }}
+    </mat-radio-button>
+  </mat-radio-group>
+</mat-menu>

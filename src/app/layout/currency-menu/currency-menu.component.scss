@@ -1,0 +1,24 @@
+.mat-menu-content:not(:empty) {
+  padding: 13px !important;
+}
+
+.mat-radio-button {
+  display: block !important;
+  margin: 8px 0 !important;
+}
+
+.mat-menu-panel {
+  min-height: 60px !important;
+}
+
+@media screen and (max-width: 600px) {
+  button[mat-flat-button] {
+    float: right;
+    margin-right: 7px;
+    font-size: 15px !important;
+    color: black !important;
+    min-width: 48px !important;
+    padding: 0 !important;
+    line-height: 28px !important;
+  }
+}

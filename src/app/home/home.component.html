@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>{{ pageName }}</h2>
+  <mat-tab-group mat-align-tabs="start" mat-stretch-tabs disablePagination="true">
+    <mat-tab label="Items">
+      <ng-template matTabContent>
+        <items-tab></items-tab>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Stores">
+      <ng-template matTabContent>
+        <stores-tab></stores-tab>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

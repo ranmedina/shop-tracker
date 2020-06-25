@@ -1,0 +1,32 @@
+@import '~@angular/material/theming';
+
+// Change app's default font to Montserrat
+$custom-typography: mat-typography-config(
+  $font-family: '"Montserrat", sans-serif;',
+);
+@include mat-core($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: url('../src/assets/background.png');
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.elipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

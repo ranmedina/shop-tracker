@@ -1,0 +1,9 @@
+<header>
+  <navbar></navbar>
+</header>
+
+<error *ngIf="isError"></error>
+
+<div *ngIf="!isError" [ngClass.gt-xs]="'router'">
+  <router-outlet></router-outlet>
+</div>

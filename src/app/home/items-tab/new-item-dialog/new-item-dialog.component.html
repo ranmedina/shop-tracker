@@ -1,0 +1,40 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title class="uppercase">Add New Item</h1>
+  <button mat-stroked-button (click)="generateData()">Generate Random Data</button>
+  <div mat-dialog-content>
+    <p>Please fill the item details below:</p>
+    <form id="itemForm" [formGroup]="itemForm" (ngSubmit)="submit()">
+      <mat-form-field>
+        <mat-icon matPrefix>info &nbsp;</mat-icon>
+        <input matInput placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="formControls.name.invalid">{{ matErrorMessage.name }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-icon matPrefix>store &nbsp;</mat-icon>
+        <input matInput placeholder="Store" formControlName="store" />
+        <mat-error *ngIf="formControls.store.invalid">{{ matErrorMessage.store }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <span matPrefix>{{ userCurrency === Currency.ILS ? '₪' : '$' }}</span>
+        <input matInput type="tel" placeholder="Price" formControlName="price" />
+        <mat-error *ngIf="formControls.price.invalid">{{ matErrorMessage.price }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="datePicker"
+          placeholder="Estimated Delivery Time"
+          [min]="minDate"
+          formControlName="arrivalDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+        <mat-error *ngIf="formControls.arrivalDate.invalid">{{ matErrorMessage.arrivalDate }}</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-stroked-button mat-dialog-close>Close</button>
+    <button mat-stroked-button cdkFocusInitial form="itemForm" type="submit">Create</button>
+  </div>
+</div>
