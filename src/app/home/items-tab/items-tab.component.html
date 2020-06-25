@@ -1,4 +1,4 @@
-<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" fxHide.xs>
+<mat-table [dataSource]="dataSource" matSort matSortActive="arrivalDate" matSortDirection="asc" class="mat-elevation-z8" fxHide.xs>
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>

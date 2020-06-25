@@ -21,10 +21,12 @@ export class ItemsTabComponent implements OnInit {
   public desktopColumns = ['id', 'name', 'store', 'price', 'arrivalDate'];
   public mobileColumns = ['id', 'item'];
 
+  private filterByReceived = (e) => e.received !== this.isPurchasedPage;
+
   public dataSource = new MatTableDataSource(
     appStore
       .getState()
-      .item.items.filter((e) => e.received !== this.isPurchasedPage)
+      .item.items.filter(this.filterByReceived)
       .sort((a, b) => a.arrivalDate.getTime() - b.arrivalDate.getTime())
   );
 
@@ -41,7 +43,7 @@ export class ItemsTabComponent implements OnInit {
 
     // Instead of using a getter, update dataSource just when state is updated
     appStore.subscribe(() => {
-      this.dataSource.data = appStore.getState().item.items;
+      this.dataSource.data = appStore.getState().item.items.filter(this.filterByReceived);
     });
   }
 
@@ -51,6 +53,7 @@ export class ItemsTabComponent implements OnInit {
 
   public markAsReceived(item: Item) {
     appStore.dispatch(this.itemActions.receiveItem(item));
+    this.dataSource.data = appStore.getState().item.items.filter(this.filterByReceived);
   }
 
   public openNewItemDialog(): void {
