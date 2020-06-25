@@ -18,8 +18,15 @@ export class ItemsTabComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   public isPurchasedPage: boolean = this.router.url === '/list' || this.router.url === '/';
-  public desktopColumns = ['index', 'name', 'store', 'price', 'arrival_date'];
-  public mobileColumns = ['index', 'item'];
+  public desktopColumns = ['id', 'name', 'store', 'price', 'arrivalDate'];
+  public mobileColumns = ['id', 'item'];
+
+  public dataSource = new MatTableDataSource(
+    appStore
+      .getState()
+      .item.items.filter((e) => e.received !== this.isPurchasedPage)
+      .sort((a, b) => a.arrivalDate.getTime() - b.arrivalDate.getTime())
+  );
 
   constructor(private dialog: MatDialog, private itemActions: ItemActions, private router: Router) {}
 
@@ -27,18 +34,15 @@ export class ItemsTabComponent implements OnInit {
     this.dataSource.sort = this.sort;
 
     if (this.isPurchasedPage) {
+      // Received button should only appear on Purchased page
       this.desktopColumns.push('action');
       this.mobileColumns.push('action');
     }
-  }
 
-  get dataSource() {
-    return new MatTableDataSource(
-      appStore
-        .getState()
-        .item.items.filter((e) => e.received !== this.isPurchasedPage)
-        .sort((a, b) => a.arrivalDate.getTime() - b.arrivalDate.getTime())
-    );
+    // Instead of using a getter, update dataSource just when state is updated
+    appStore.subscribe(() => {
+      this.dataSource.data = appStore.getState().item.items;
+    });
   }
 
   get userCurrency() {

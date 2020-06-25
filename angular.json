@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/ran-medina-23-06-2020/",
             "outputPath": "dist/shopping-tracking-list",
             "index": "src/index.html",
             "main": "src/main.ts",

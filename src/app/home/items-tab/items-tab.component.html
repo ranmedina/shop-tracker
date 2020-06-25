@@ -1,5 +1,5 @@
 <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" fxHide.xs>
-  <ng-container matColumnDef="index">
+  <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>
   </ng-container>
@@ -19,7 +19,7 @@
     <mat-cell *matCellDef="let element">{{ element.price | currency: userCurrency }}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="arrival_date">
+  <ng-container matColumnDef="arrivalDate">
     <mat-header-cell *matHeaderCellDef mat-sort-header>{{ isPurchasedPage ? 'ETA' : 'Received' }}</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.arrivalDate | date: 'dd/MM/yyyy' }}</mat-cell>
   </ng-container>
@@ -39,7 +39,7 @@
 </mat-table>
 
 <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" fxHide fxShow.xs>
-  <ng-container matColumnDef="index">
+  <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>
   </ng-container>
