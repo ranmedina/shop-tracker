@@ -30,3 +30,13 @@ body {
   overflow: hidden;
   white-space: nowrap;
 }
+
+@media screen and (max-width: 600px) {
+  .mat-header-cell {
+    flex: 1 !important;
+  }
+
+  .mat-column-action, .mat-column-price, .mat-sort-header.mat-column-item {
+    place-content: center !important;
+  }
+}

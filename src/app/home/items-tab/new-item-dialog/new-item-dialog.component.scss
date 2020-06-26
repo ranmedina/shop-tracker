@@ -28,6 +28,11 @@
   div[mat-dialog-actions] {
     button {
       margin: 5px 0;
+
+      &.valid {
+        background-color: #60c060;
+        color: white;
+      }
     }
   }
 }

@@ -21,9 +21,9 @@ export class NewItemDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemForm = this.fb.group({
-      name: [null, Validators.required],
-      store: [null, Validators.required],
-      price: [null, Validators.required],
+      name: [null, [Validators.required, this.validateWhiteSpaces]],
+      store: [null, [Validators.required, this.validateWhiteSpaces]],
+      price: [null, [Validators.required, Validators.pattern(/^\d*\.?\d*$/)]],
       arrivalDate: [null, Validators.required],
     });
   }
@@ -34,6 +34,14 @@ export class NewItemDialogComponent implements OnInit {
 
   get userCurrency(): Currency {
     return appStore.getState().app.currency;
+  }
+
+  private validateWhiteSpaces(control: FormControl) {
+    if (control.value === null) {
+      return;
+    }
+
+    return !control.value.trim().length ? { whiteSpace: true } : null;
   }
 
   public generateData(): void {
@@ -51,6 +59,10 @@ export class NewItemDialogComponent implements OnInit {
     switch (errorKey) {
       case 'required':
         return 'This field is required';
+      case 'pattern':
+        return 'Price must be a number';
+      case 'whiteSpace':
+        return 'Must be atleast 1 character (excluding spaces)';
     }
 
     return 'Invalid field';
@@ -58,6 +70,7 @@ export class NewItemDialogComponent implements OnInit {
 
   public submit(): void {
     if (this.itemForm.invalid) {
+      console.log(this.itemForm);
       Object.keys(this.formControls).forEach((key: string) => {
         const control: AbstractControl = this.formControls[key];
         if (control.errors) {

@@ -18,10 +18,10 @@ export class ItemsTabComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   public isPurchasedPage: boolean = this.router.url === '/list' || this.router.url === '/';
-  public desktopColumns = ['id', 'name', 'store', 'price', 'arrivalDate'];
-  public mobileColumns = ['id', 'item'];
+  public desktopColumns = ['name', 'store', 'price', 'arrivalDate'];
+  public mobileColumns = ['item'];
 
-  private filterByReceived = (e) => e.received !== this.isPurchasedPage;
+  private filterByReceived = (e: Item) => e.received !== this.isPurchasedPage;
 
   public dataSource = new MatTableDataSource(
     appStore
@@ -39,6 +39,8 @@ export class ItemsTabComponent implements OnInit {
       // Received button should only appear on Purchased page
       this.desktopColumns.push('action');
       this.mobileColumns.push('action');
+    } else {
+      this.mobileColumns.push('price');
     }
 
     // Instead of using a getter, update dataSource just when state is updated

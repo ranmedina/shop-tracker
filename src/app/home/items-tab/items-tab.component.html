@@ -1,9 +1,4 @@
 <mat-table [dataSource]="dataSource" matSort matSortActive="arrivalDate" matSortDirection="asc" class="mat-elevation-z8" fxHide.xs>
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>
-  </ng-container>
-
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
@@ -39,19 +34,20 @@
 </mat-table>
 
 <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" fxHide fxShow.xs>
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.id + 1 }}</mat-cell>
-  </ng-container>
-
   <ng-container matColumnDef="item">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Item</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <div>
         <p>{{ element.name }}</p>
         <p>{{ element.store }}</p>
-        <p>{{ element.price | currency: userCurrency }}</p>
       </div>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="price" *ngIf="!isPurchasedPage">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <p>{{ element.price | currency: userCurrency }}</p>
     </mat-cell>
   </ng-container>
 

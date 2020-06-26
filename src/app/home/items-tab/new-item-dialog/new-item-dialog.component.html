@@ -35,6 +35,6 @@
   </div>
   <div mat-dialog-actions align="end">
     <button mat-stroked-button mat-dialog-close>Close</button>
-    <button mat-stroked-button cdkFocusInitial form="itemForm" type="submit">Create</button>
+    <button mat-stroked-button cdkFocusInitial form="itemForm" type="submit" [class.valid]="itemForm.valid">Create</button>
   </div>
 </div>

@@ -1,19 +1,23 @@
 mat-table {
   width: 100%;
 
-  @media screen and (max-width: 599px) {
+  mat-cell:first-of-type,
+  mat-header-cell:first-of-type,
+  mat-footer-cell:first-of-type {
+    padding: 0 24px !important;
+  }
+
+  @media screen and (max-width: 600px) {
     mat-cell,
     mat-header-cell,
     mat-footer-cell {
-      flex: auto !important;
-
       button {
         background: #673ab7;
         color: white;
       }
     }
 
-    p {
+    .mat-column-item p {
       margin: 7px;
       color: gray;
 
@@ -32,7 +36,6 @@ mat-table {
 }
 
 button[mat-fab] {
-  // margin: 5px 0;
   float: right;
   margin: 30px 20px;
 }
