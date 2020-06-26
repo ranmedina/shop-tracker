@@ -13,7 +13,7 @@ export class StoresTabComponent implements OnInit {
   public reducedData: { [store: string]: { openState: boolean; items: Item[] } };
   public today = new Date();
   public objectKeys = Object.keys;
-  public isPurchasedPage: boolean = this.router.url === '/list' || this.router.url === '/';
+  public isPurchasedPage = this.router.url === '/list' || this.router.url === '/';
 
   constructor(private router: Router) {}
 

@@ -70,7 +70,6 @@ export class NewItemDialogComponent implements OnInit {
 
   public submit(): void {
     if (this.itemForm.invalid) {
-      console.log(this.itemForm);
       Object.keys(this.formControls).forEach((key: string) => {
         const control: AbstractControl = this.formControls[key];
         if (control.errors) {

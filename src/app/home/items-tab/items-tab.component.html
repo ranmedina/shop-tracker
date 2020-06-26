@@ -40,6 +40,7 @@
       <div>
         <p>{{ element.name }}</p>
         <p>{{ element.store }}</p>
+        <p *ngIf="isPurchasedPage">{{ element.price | currency: userCurrency }}</p>
       </div>
     </mat-cell>
   </ng-container>

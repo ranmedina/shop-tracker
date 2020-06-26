@@ -30,9 +30,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe((e) => {
         if (e instanceof HttpErrorResponse) {
-          console.log('HttpErrorResponse');
           appStore.dispatch(this.appActions.setCurrencyRates({ ILS: -1, USD: -1, EUR: -1 }));
-
           return;
         }
 

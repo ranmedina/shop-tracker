@@ -18,7 +18,7 @@
         <mat-list-item>
           <mat-icon>{{ getDateInfo(item).icon }}</mat-icon>
           <span class="bold">{{ item.name }}</span>
-          &nbsp; (by {{ item.store }}, {{ item.price | currency: userCurrency }}, {{ getDateInfo(item).text }}
+          &nbsp; ({{ item.price | currency: userCurrency }}, {{ getDateInfo(item).text }}
           on
           {{ item.arrivalDate | date: 'dd/MM/yyyy' }})
         </mat-list-item>
