@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { of, interval } from 'rxjs';
-import { catchError, flatMap, startWith } from 'rxjs/operators';
+import { catchError, mergeMap, startWith } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { appStore } from 'src/store/app.store';
 import { AppActions } from 'src/store/actions/app.actions';
@@ -22,11 +22,12 @@ export class AppComponent implements OnInit {
     interval(this.INTERVAL_SECONDS * 1000)
       .pipe(
         startWith(0),
-        flatMap(() => this.http.get(this.apiEndpoint)),
-        catchError((e) => {
-          console.error(e);
-          return of(e);
-        })
+        mergeMap(() => this.http.get(this.apiEndpoint).pipe(
+          catchError((e) => {
+            console.error(e);
+            return of(e);
+          })
+        ))
       )
       .subscribe((e) => {
         if (e instanceof HttpErrorResponse) {

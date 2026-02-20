@@ -1,8 +1,8 @@
 <mat-accordion>
   <mat-expansion-panel
     *ngFor="let store of reducedData | keyvalue"
-    (opened)="(reducedData[store.key].openState)"
-    (closed)="(!reducedData[store.key].openState)"
+    (opened)="reducedData[store.key].openState = true"
+    (closed)="reducedData[store.key].openState = false"
   >
     <mat-expansion-panel-header>
       <mat-panel-title>

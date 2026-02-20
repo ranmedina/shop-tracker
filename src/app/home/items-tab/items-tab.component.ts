@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewItemDialogComponent } from './new-item-dialog/new-item-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,9 +14,10 @@ import { Router } from '@angular/router';
   templateUrl: './items-tab.component.html',
   styleUrls: ['./items-tab.component.scss'],
 })
-export class ItemsTabComponent implements OnInit {
+export class ItemsTabComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  private unsubscribeStore: () => void;
   public isPurchasedPage: boolean = this.router.url === '/list' || this.router.url === '/';
   public desktopColumns = ['name', 'store', 'price', 'arrivalDate'];
   public mobileColumns = ['item'];
@@ -44,9 +45,15 @@ export class ItemsTabComponent implements OnInit {
     }
 
     // Instead of using a getter, update dataSource just when state is updated
-    appStore.subscribe(() => {
+    this.unsubscribeStore = appStore.subscribe(() => {
       this.dataSource.data = appStore.getState().item.items.filter(this.filterByReceived);
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.unsubscribeStore) {
+      this.unsubscribeStore();
+    }
   }
 
   get userCurrency() {

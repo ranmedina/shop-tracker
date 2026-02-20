@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { appStore } from 'src/store/app.store';
 import { Item } from 'src/app/models/item.model';
 import { Router } from '@angular/router';
@@ -8,16 +8,32 @@ import { Router } from '@angular/router';
   templateUrl: './stores-tab.component.html',
   styleUrls: ['./stores-tab.component.scss'],
 })
-export class StoresTabComponent implements OnInit {
+export class StoresTabComponent implements OnInit, OnDestroy {
   public panelOpenState = false;
   public reducedData: { [store: string]: { openState: boolean; items: Item[] } };
   public today = new Date();
   public objectKeys = Object.keys;
   public isPurchasedPage = this.router.url === '/list' || this.router.url === '/';
 
+  private unsubscribeStore: () => void;
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.updateReducedData();
+
+    this.unsubscribeStore = appStore.subscribe(() => {
+      this.updateReducedData();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.unsubscribeStore) {
+      this.unsubscribeStore();
+    }
+  }
+
+  private updateReducedData(): void {
     this.reducedData = appStore
       .getState()
       .item.items.filter((i) => i.received !== this.isPurchasedPage)

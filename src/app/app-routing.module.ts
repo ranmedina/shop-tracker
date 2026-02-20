@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'list',
-    pathMatch: 'prefix',
+    pathMatch: 'full',
   },
   {
     path: 'list',

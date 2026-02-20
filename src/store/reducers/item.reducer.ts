@@ -15,11 +15,13 @@ export function itemReducer(state: IItemState = initialItemState, action: any) {
       return {
         ...state,
         items: [...state.items, action.payload],
+        itemsOrdered: state.itemsOrdered + 1,
       };
     case Actions.ReceiveItem:
       return {
         ...state,
         items: state.items.map((item) => (item.id === action.payload.id ? { ...item, received: true } : item)),
+        itemsReceived: state.itemsReceived + 1,
       };
   }
 

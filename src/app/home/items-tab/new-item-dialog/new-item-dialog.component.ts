@@ -45,7 +45,7 @@ export class NewItemDialogComponent implements OnInit {
   }
 
   public generateData(): void {
-    const rand = Math.round(mockItems.length * Math.random() + 1);
+    const rand = Math.floor(Math.random() * mockItems.length);
     const { name, store, price } = mockItems[rand];
     this.formControls.name.setValue(name);
     this.formControls.store.setValue(store);

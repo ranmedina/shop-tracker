@@ -4,6 +4,7 @@ import { Currency } from '../models/currency.enum';
 
 @Pipe({
   name: 'currency',
+  pure: false,
 })
 export class CurrencyPipe implements PipeTransform {
   transform(value: number, ...args: unknown[]): unknown {
